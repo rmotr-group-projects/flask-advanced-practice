@@ -30,6 +30,11 @@ Tests are split among several functions. You can run them all together doing `py
 
 ## Tasks
 
-The goal for this practice is to implement a simple login form with username and password, introducing some HTML content and some extra Flask functionalities apart from the ones used in the last practice (i.e: redirect function)
+The goal for this practice is to implement a simple login form with username and password, introducing some HTML content and some extra Flask functionalities apart from the ones used in the last practice (i.e: redirect, abort, etc)
 
 The first three views are done for you as an example. You'll have to reply the same given functionality but in a single view combining actions for both GET and POST methods.
+
+You'll work on `login_form()` view. You'll have to somehow determine which HTTP method was used (either GET or POST).
+  - If GET method was used, just return HTML content with the login form. Make sure that the new HTML login form points to the same /login-form URL while POSTing
+  - If POST method was used, get the given username and password from the form data and perform a redirect to `index()` view sending the username as payload.
+    NOTE: If any of username or password were not given, use Flask's `abort()` function to return a 404 - Not found response

@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, redirect, url_for
+from flask import Flask, request, redirect, url_for, abort
 
 
 app = Flask(__name__)
@@ -48,7 +48,7 @@ def login_form():
     """
     if request.method == 'GET':
         html = """
-            <form action="/post-form" method="POST">
+            <form action="/login-form" method="POST">
                 <div>
                     <label>Username</label>
                     <input name="username">
@@ -62,8 +62,12 @@ def login_form():
         """
         return html
     elif request.method == 'POST':
-        user = request.form['username']
-        return redirect(url_for('index', user=user))
+        user = request.form.get('username')
+        password = request.form.get('password')
+        if user and password:
+            return redirect(url_for('index', user=user))
+        else:
+            abort(404)
 
 
 if __name__ == '__main__':
