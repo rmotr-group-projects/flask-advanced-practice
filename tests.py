@@ -11,12 +11,10 @@ class FlaskHTMLPracticeTestCase(unittest.TestCase):
     def test_1_index(self):
         response = self.client.get('/index')
         assert response.status_code == 200
-        # assert b'Hello Guido Van Rossum!' in str(response.data)
 
     def test_2_index_with_params(self):
         response = self.client.get('/index?user=test')
         assert response.status_code == 200
-        # assert (response.data) == b'The sum of 100 and 200 is: 300'
 
     def test_3_get_form(self):
         response = self.client.get('/get-form')
@@ -37,5 +35,14 @@ class FlaskHTMLPracticeTestCase(unittest.TestCase):
 
     def test_7_post_login_form(self):
         response = self.client.post(
-            '/login-form', data={'username': 'Guido van Rossum'})
+            '/login-form',
+            data={'username': 'Guido van Rossum', 'password': 'topsecret'}
+        )
         assert response.status_code == 302
+
+    def test_8_post_login_form_missing_data(self):
+        response = self.client.post(
+            '/login-form',
+            data={'username': 'Guido van Rossum'}
+        )
+        assert response.status_code == 404
