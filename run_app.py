@@ -39,7 +39,7 @@ def post_login_form():
     return redirect(url_for('index', user=user))
 
 
-@app.route('/login-form', methods=['GET', 'POST'])
+# NOTE: Use '/login-form' as URL for this view in order to make tests pass
 def login_form():
     """
         Reply the examples given above in one single view. You can use request.method
