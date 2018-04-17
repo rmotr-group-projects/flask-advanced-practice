@@ -46,24 +46,7 @@ def login_form():
         to determine which HTTP method was used (either 'GET' or 'POST'),
         and perform one action or another.
     """
-    if request.method == 'GET':
-        html = """
-            <form action="/post-form" method="POST">
-                <div>
-                    <label>Username</label>
-                    <input name="username">
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input name="password" type="password">
-                </div>
-                <button type="submit">Submit</button>
-            </form>
-        """
-        return html
-    elif request.method == 'POST':
-        user = request.form['username']
-        return redirect(url_for('index', user=user))
+    pass
 
 
 if __name__ == '__main__':
