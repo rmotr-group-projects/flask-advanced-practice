@@ -1,12 +1,12 @@
 import os
-from flask import Flask, request, redirect, url_for, abort
+from flask import Flask, request, redirect, url_for, abort, render_template
 
 
 app = Flask(__name__)
 
 @app.route('/index')
 def index():
-    user = request.args.get('user') or 'Guido Van Rossum'
+    user = request.args.get('user', 'Guido Van Rossum')
     html = """
         <html>
             <h1>Hello {}!</h1>
@@ -68,6 +68,33 @@ def login_form():
             return redirect(url_for('index', user=user))
         else:
             abort(404)
+
+
+# Optional extra task
+@app.route('/profile', methods=['GET'])
+def profile():
+    """
+        For this optional task, you'll have to create a user profile using the
+        data given below. In order to do that, you'll need to create a new
+        'profile.html' file with your HTML code, inside a new folder
+        called "templates" (in which Flask looks for templates by default).
+
+        Once the HTML code is implemented, render it using the "render_template()"
+        function imported from Flask, and send the user data as context.
+    """
+    USER_DATA = {
+        'first_name': 'Guido',
+        'last_name': 'van Rossum',
+        'age': 62,
+        'birthdate': '31 January 1956',
+        'nationality': 'Dutch',
+        'worked_at': [
+            'Python language development',
+            'Google',
+            'Dropbox'
+        ]
+    }
+    return render_template('profile.html', user_data=USER_DATA)
 
 
 if __name__ == '__main__':

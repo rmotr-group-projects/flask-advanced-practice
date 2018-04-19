@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>{{user_data.full_name}} profile</title>
+        <style type="text/css">
+            h1 {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Welcome to {{user_data.first_name}} {{user_data.last_name}} profile!</h1>
+        <p>Age: {{user_data.age}}</p>
+        <p>Birthdate: {{user_data.birthdate}}</p>
+        <p>Nationality: {{user_data.nationality}}</p>
+        <p>Worked at:</p>
+        <ul>
+          {% for work in user_data.worked_at %}
+            <li>{{ work }}</li>
+          {% endfor %}
+        </ul>
+    </body>
+</html>
