@@ -49,6 +49,32 @@ def login_form():
     pass
 
 
+# Optional extra task
+# NOTE: Use '/profile' URL for this view
+def profile():
+    """
+        For this optional task, you'll have to create a user profile using the
+        data given below. In order to do that, you'll need to create a new
+        'profile.html' file with your HTML code, inside a new folder
+        called "templates" (in which Flask looks for templates by default).
+        Once the HTML code is implemented, render it using the "render_template()"
+        function imported from Flask, and send the user data as context.
+    """
+    USER_DATA = {
+        'first_name': 'Guido',
+        'last_name': 'van Rossum',
+        'age': 62,
+        'birthdate': '31 January 1956',
+        'nationality': 'Dutch',
+        'worked_at': [
+            'Python language development',
+            'Google',
+            'Dropbox'
+        ]
+    }
+    pass
+
+
 if __name__ == '__main__':
     app.debug = True
     host = os.environ.get('IP', '0.0.0.0')

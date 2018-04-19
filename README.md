@@ -38,3 +38,9 @@ You'll work on `login_form()` view. You'll have to somehow determine which HTTP 
   - If GET method was used, just return HTML content with the login form. Make sure that the new HTML login form points to the same /login-form URL while POSTing
   - If POST method was used, get the given username and password from the form data and perform a redirect to `index()` view sending the username as payload.
     NOTE: If any of username or password were not given, use Flask's `abort()` function to return a 404 - Not found response
+
+#### Optional extra task:
+
+For this optional task, you'll have to create a user profile using the given data. In order to do that, you'll need to create a new `profile.html` file that will contain your HTML code, inside a new folder called `templates` (in which Flask looks for templates by default).
+
+Once the HTML code is implemented, render it using the `render_template()` function imported from Flask, and send the user data as context.
