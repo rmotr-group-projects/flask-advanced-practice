@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/index')
 def index():
-    user = request.args.get('user') or 'Guido Van Rossum'
+    user = request.args.get('user', 'Guido Van Rossum')
     html = """
         <html>
             <h1>Hello {}!</h1>
