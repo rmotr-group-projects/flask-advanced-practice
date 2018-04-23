@@ -49,15 +49,16 @@ def login_form():
     pass
 
 
-# Optional extra task
+# Extra task
 # NOTE: Use '/profile' URL for this view
 def profile():
     """
-        For this optional task, you'll have to create a user profile using the
-        data given below. In order to do that, you'll need to create a new
-        'profile.html' file with your HTML code, inside a new folder
+        For this task, we'll create a user profile using the USER_DATA given below.
+        The structure of the HTML code is given to you inside a folder
         called "templates" (in which Flask looks for templates by default).
-        Once the HTML code is implemented, render it using the "render_template()"
+        Some of the data was completed inside the template for you as example,
+        make sure to complete the rest.
+        You'll also have to render the 'profile.html' file using the render_template()
         function imported from Flask, and send the user data as context.
     """
     USER_DATA = {
