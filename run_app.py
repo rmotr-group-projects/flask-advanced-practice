@@ -17,21 +17,8 @@ def index():
 
 @app.route('/get-form', methods=['GET'])
 def get_login_form():
-    html = """
-        <form action="/post-form" method="POST">
-            <div>
-                <label>Username</label>
-                <input name="username">
-            </div>
-            <div>
-                <label>Password</label>
-                <input name="password" type="password">
-            </div>
-            <button type="submit">Submit</button>
-        </form>
-    """
-    return html
-
+    return render_template('login.html', version="/post-form")
+    
 
 @app.route('/post-form', methods=['POST'])
 def post_login_form():
@@ -40,17 +27,26 @@ def post_login_form():
 
 
 # NOTE: Use '/login-form' as URL for this view in order to make tests pass
+@app.route('/login-form', methods=['GET', 'POST'])
 def login_form():
     """
         Reply the examples given above in one single view. You can use request.method
         to determine which HTTP method was used (either 'GET' or 'POST'),
         and perform one action or another.
     """
-    pass
+    if request.method == 'GET':
+        return render_template('login.html', version="/login-form")
+        
+    if request.method == 'POST':
+        if not (request.form.get('username') and request.form.get('password')):
+            abort(404)
+        user = request.form['username']
+        return redirect(url_for('index', user=user))
 
 
 # Extra task
 # NOTE: Use '/profile' URL for this view
+@app.route('/profile', methods=['GET'])
 def profile():
     """
         For this task, we'll create a user profile using the USER_DATA given below.
@@ -73,7 +69,7 @@ def profile():
             'Dropbox'
         ]
     }
-    pass
+    return render_template('profile.html', user_data=USER_DATA)
 
 
 if __name__ == '__main__':
