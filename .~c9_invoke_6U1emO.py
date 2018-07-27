@@ -84,7 +84,7 @@ def profile():
             'Dropbox'
         ]
     }
-    return render_template('profile.html', user_data=USER_DATA)
+    retur
 
 
 if __name__ == '__main__':
