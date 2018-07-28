@@ -36,16 +36,33 @@ def get_login_form():
 @app.route('/post-form', methods=['POST'])
 def post_login_form():
     user = request.form['username']
+    try:
+        password = request.form['password']
+    except:
+        return redirect(url_for('index', user=user))
+    
+    if (not user or not password):
+        abort(404)
+    
     return redirect(url_for('index', user=user))
 
 
 # NOTE: Use '/login-form' as URL for this view in order to make tests pass
+@app.route('/login-form', methods=['GET', 'POST'])
 def login_form():
     """
         Reply the examples given above in one single view. You can use request.method
         to determine which HTTP method was used (either 'GET' or 'POST'),
         and perform one action or another.
     """
+    if request.method == 'GET':
+        return get_login_form()
+    else:
+        try:
+            password = request.form['password']
+        except:
+            abort(404)
+        return post_login_form()
     pass
 
 
