@@ -46,17 +46,6 @@ def login_form():
         Reply the examples given above in one single view. You can use request.method
         to determine which HTTP method was used (either 'GET' or 'POST'),
         and perform one action or another.
-        
-        You’ll work on login_form() view. You’ll have to somehow determine which 
-        HTTP method was used (either GET or POST).
-
-        If GET method was used, just return HTML content with the login form. 
-        Make sure that the new HTML login form points to the same /login-form URL while POSTing
-
-        If POST method was used, get the given username and password from the form data 
-        and perform a redirect to index() view sending the username as payload. 
-        NOTE: If any of username or password were not given, use Flask’s abort() 
-        function to return a 404 - Not found response
     """
     if request.method == 'GET':
         return get_login_form()
