@@ -54,6 +54,8 @@ def login_form():
             abort(404)
 
 # NOTE: Use '/profile' URL for this view
+
+
 @app.route('/profile', methods=['GET'])
 def profile():
     USER_DATA = {
