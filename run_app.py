@@ -1,35 +1,38 @@
 import os
 from flask import Flask, request, redirect, url_for, abort, render_template
 
-
 app = Flask(__name__)
+
+@app.route('/')
+def home():
+    user = request.args.get('user', 'Guido Van Rossum')
+    return redirect(url_for('index', user=user))
+
 
 @app.route('/index')
 def index():
     user = request.args.get('user', 'Guido Van Rossum')
-    html = """
-        <html>
-            <h1>Hello {}!</h1>
-        </html>
-    """.format(user.title())
-    return html
+    return render_template('index.html', user=user)
 
 
 @app.route('/get-form', methods=['GET'])
 def get_login_form():
     html = """
-        <form action="/post-form" method="POST">
-            <div>
-                <label>Username</label>
-                <input name="username">
+            <div class="container">
+                <form action="/post-form" method="POST">
+                  <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Your Username">
+                  </div>
+                  
+                   <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Your Password">
+                  </div> 
+                  <button type="submit" class="btn btn-success">Submit</button>
+                </form>
             </div>
-            <div>
-                <label>Password</label>
-                <input name="password" type="password">
-            </div>
-            <button type="submit">Submit</button>
-        </form>
-    """
+            """
     return html
 
 
@@ -39,18 +42,26 @@ def post_login_form():
     return redirect(url_for('index', user=user))
 
 
-# NOTE: Use '/login-form' as URL for this view in order to make tests pass
+@app.route('/login-form', methods=['GET', 'POST'])
 def login_form():
-    """
-        Reply the examples given above in one single view. You can use request.method
-        to determine which HTTP method was used (either 'GET' or 'POST'),
-        and perform one action or another.
-    """
-    pass
+    
+    if request.method == 'GET':
+        return render_template('login_form.html')
+        
+    elif request.method == 'POST':
+        user = request.form.get('username')
+        password = request.form.get('password')
+        
+        if user and password:
+            return redirect(url_for('index', user=user))
+        
+        else:
+            return abort(404)  
 
 
 # Extra task
 # NOTE: Use '/profile' URL for this view
+@app.route('/profile', methods=['GET'])
 def profile():
     """
         For this task, we'll create a user profile using the USER_DATA given below.
@@ -73,8 +84,11 @@ def profile():
             'Dropbox'
         ]
     }
-    pass
+    return render_template('profile.html', user_data=USER_DATA)
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 if __name__ == '__main__':
     app.debug = True

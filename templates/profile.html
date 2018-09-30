@@ -1,20 +1,33 @@
-<html>
-    <head>
-        <style type="text/css">
+{% extends 'base.html' %}
+
+
+<!-- Title Block -->
+{% block title %} FLASK HTML PRACTICE {% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <style type="text/css">
             h1 {
                 color: red;
             }
         </style>
-    </head>
-    <body>
-        <h1>Welcome to {{user_data.first_name}} {{user_data.last_name}} profile!</h1>
-        <p>Age: </p>
-        <p>Birthdate: </p>
-        <p>Nationality: </p>
-        <p>Worked at:</p>
-        <ul>
-          <!-- HINT: Use the forloop syntax from Flask template engine to
-          render a <li> tag for each work in user_data.worked_at -->
-        </ul>
-    </body>
-</html>
+        
+    <h1>Welcome to {{user_data.first_name}} {{user_data.last_name}} profile!</h1>
+    <hr />
+    <p><strong>Age:</strong>  {{user_data.age}}</p>
+    <p><strong>Birthdate:</strong>  {{user_data.birthdate}}</p>
+    <p><strong>Nationality:</strong>  {{user_data.nationality}}</p>
+    <p><strong>Worked at:</strong></p>
+    <ul>
+        
+        {% for worked in user_data.worked_at %}
+        
+        <li>{{worked}}</li>
+        
+        {% endfor %}
+        
+    </ul>
+    </div>
+    
+{% endblock %}
